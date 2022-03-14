@@ -20,14 +20,15 @@ Pixel data has 3 channels: a red, green and blue channel for each pixel. The goa
 
 Import the image so we can shape into its respective RGB pixel values.
 
+![Drag Racing](images/image9.png)
 
 
 Run K-means clustering through all the stored images we collected. Compress them via replacing each pixel with nearby centroids. Reshape it back to its original dimension, and save the new compress images into a folder.
 
-
+![Drag Racing](images/image5.png)
 We call the function timeit.default_timer() so we can calculate how long it takes to compress all the images of cats and dogs. Yielding a result that shows cat images compress faster than dog images. 
 
-
+![Drag Racing](images/image2.png)
 
 ## K-means clustering 
 Given a k, create a model with k clusters. Each cluster is a color. The KMeans algorithm works by shifting k cluster centers into their optimal location (the algorithmic mean of each color in the cluster) by loss minimization. When an instance n becomes closer to one cluster center than its current cluster center, it swaps centers. We partition n instances into k clusters. 
@@ -41,18 +42,19 @@ Given a k, create a model with a specified number of clusters. The gaussian mixt
 For this particular example we implemented an eleven(11) component GM model to reproduce the compress image below. Implementation was really simple. By calling the Gaussian Mixture function from sklearn. We were able to determine its means and then run a for loop to predict the proper pixels and arrange them to produce the picture on the right.
 
 
-			
+	![Drag Racing](images/image3.png)		
 
 Compressing Image
 To compress the image, we shift each pixel to it’s nearest cluster. A gray might become a white, for example. 
-
-
+![Drag Racing](images/image6.png)
+![Drag Racing](images/image8.png)
 ## Optimal K (Severin Field)
 The optimal k is the number of clusters which finds the number of clusters which is “optimal” for an image. In other words, where adding more colors (clusters) does not add much accuracy to the model because new colors are the same as older colors. The goal of this project is ultimately to use as few colors as possible to still see a good image. Inertia is a measure of dispersion within a cluster. If a cluster is all very close together, the inertia is small. If a cluster is spread out, the inertia is large. So with two clusters, the color differences between the cluster centers will vary wildly, while with 200 different colors (clusters), the colors won’t have to undergo such a large shift. Our hypothesis is that the inflection point on the “inertia vs k” graph will minimize the file size most efficiently while maximizing quality. K’s beyond this point have diminishing returns in reducing the number of colors, which we believe will lower file size. 
 
 Initially, we just found the elbow by finding the k whose inertia was in the 90th percentile of inertias (because further increasing k would only yield 10% extra returns). Though this method works, we opted for an off the shelf elbow finding method to find the optimal k.
 
 
+![Drag Racing](images/image7.png)
 
 Using this image of a cat, we found the dispersion / variation across clusters (inertia) for a range of k, and then plotted them with the elbow finding class. We find an optimal k of 17 colors for this image and now have a pipeline that can be applied to any image. 
 
