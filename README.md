@@ -47,6 +47,7 @@ For this particular example we implemented an eleven(11) component GM model to r
 Compressing Image
 To compress the image, we shift each pixel to it’s nearest cluster. A gray might become a white, for example. 
 ![Drag Racing](images/image6.png)
+
 ![Drag Racing](images/image8.png)
 ## Optimal K (Severin Field)
 The optimal k is the number of clusters which finds the number of clusters which is “optimal” for an image. In other words, where adding more colors (clusters) does not add much accuracy to the model because new colors are the same as older colors. The goal of this project is ultimately to use as few colors as possible to still see a good image. Inertia is a measure of dispersion within a cluster. If a cluster is all very close together, the inertia is small. If a cluster is spread out, the inertia is large. So with two clusters, the color differences between the cluster centers will vary wildly, while with 200 different colors (clusters), the colors won’t have to undergo such a large shift. Our hypothesis is that the inflection point on the “inertia vs k” graph will minimize the file size most efficiently while maximizing quality. K’s beyond this point have diminishing returns in reducing the number of colors, which we believe will lower file size. 
